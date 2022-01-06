@@ -1,0 +1,59 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.total_navi{
+    margin: 10px;
+    position: relative;
+    width: auto;
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    margin: 10px;
+}
+
+.total_navi ul li {
+    display: inline-block;
+    text-decoration:none;
+    list-style-type: none;
+    color: black;
+    line-height: 30px;
+    
+    font-weight: bold;
+    font-family: "Trebuchet MS", Dotum, Arial; 
+}
+
+.total_navi .logos{
+    position: fixed;
+    display: inline-block;
+    left: 40px;
+}
+
+.total_navi .logos .navi_logo{
+    font-size: 0%;
+}
+
+.total_navi .pages{
+    display: inline-block;
+    left: 50%;
+    right: 50%;
+}
+
+.total_navi .pages .navi {
+    width: auto;
+    margin-left: 35px;
+    margin-right: 35px;
+    font-size: 12px;
+}
+
+.total_navi .userinfo{
+    position: fixed;
+    display: inline-block;
+    right: 40px;
+}
+
+.total_navi .userinfo .info{
+    margin-left: 28px;
+    font-size: 12px;
+}
