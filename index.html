@@ -1,9 +1,67 @@
 <!DOCTYPE html>
+<html>
+    <head>
+        <title>Game-recommandation-service page</title>
+        <link rel="stylesheet" href="./yejin.css" type="text/css">
+    </head>
+    <body>
+        <header>
+            <h2 class="menuText">서비스 이름</h2>
+            <nav>
+              <ul class="menu">
+                <li><a href="#mainRecom">랭킹</a></li>
+                <li>선호도</li>
+                <li>해시태그 입력</li>
+              </ul>
+            </nav>
+    
+            <nav>
+              <ul class="menu">
+                <li>로그인</li>
+                <li>회원가입</li>
+              </ul>
+            </nav>
+          </header>
+          <section class="num1">
+            <span class="mainText">Game recommand service</span>
+            <div class="mainBtnDiv">
+                <button>랭킹</button>
+                <button>선호도</button>
+                <button>해시태그 입력</button>
+            </div>
+  
+            <div class="searchSection2" id="mainRecom">
+              <span class="mainText">게임 추천</span>
+              <div class="searchDiv2">
+                <input class="searchInput" type="text"></input>
+                <button class="searchBtn" type="submit">검색</button>
+              </div>
+            </div>
+          </section>
 
-<!--
-    게임 추천 서비스의 메인 화면
--->
+          <section class="gamelist">
+            <script>
+                for (var i=0; i<12; i++) {
+                    document.write("<div class='ImgDiv'>");
+                    document.write("<div class='ImgDivDiv'>");
+                    document.write("<img src='image1.jpg' class='listImg'></img>");
+                    document.write("<span class='listName'>Game Name</span>");
+                    document.write("<div class='hashTagDiv'>");
+                    document.write("<span class='hashTag'>#호러</span>");
+                    document.write("<span class='hashTag'>#잔인한</span>");
+                    document.write("<span class='hashTag'>#협동</span>");
+                    document.write("</div>");
+                    document.write("</div>");
+                    document.write("</div>");
+                }
+            </script>
 
-<head>
-    <title>Game-recommandation-service page</title>
-</head>
+
+            
+
+
+
+
+          </section>
+    </body>
+</html>

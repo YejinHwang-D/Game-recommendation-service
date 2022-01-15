@@ -1,0 +1,240 @@
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    padding-top: 10vh;
+  }
+  
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10vh;
+    padding: 0 2rem 0 2rem;
+  
+    font-size: 14px;
+    color: white;
+    background: #37445E;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .menuText {
+    float: left;
+  }
+  
+  .menu {
+    float: right;
+  }
+  
+  .menu li {
+    margin: 10px;
+  }
+  
+  ul, li {
+    list-style: none;
+  }
+  
+  nav li {
+    /* nav안의 li들을 가로로 길게 */
+    float: left;
+  }
+  
+  
+  
+  .num1 {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 90vh;
+    background: #37445E;
+    margin: 0 0 10vh 0;
+    border-radius: 0px 0px 70% 70% / 0px 0px 30% 30%;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, .2);
+    text-align: center;
+  }
+  
+  .num1 > .mainText {
+    position: relative;
+    top: 20vh;
+  
+    color: white;
+    font-size: 32px;
+  }
+  
+  .num1 .mainBtnDiv {
+    position: relative;
+    top: 30vh;
+  
+    
+    height: 10vh;
+    
+    /*background: cornflowerblue;*/
+  }
+  
+  .num1 .mainBtnDiv button {
+    width: 20vw;
+    height: 10vh;
+    margin: 1vh;
+    
+    border: none;
+    border-radius: 1vh;
+  
+    background-color: white;
+    color: #37445E;
+  
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, .2);
+  }
+  
+  .num1 .mainBtnDiv button:hover {
+    width: 20vw;
+    height: 10vh;
+    margin: 1vh;
+    
+    border: none;
+    border-radius: 1vh;
+  
+    font-weight: bold;
+    background-color: #EAF7FF;
+    color: #000000;
+  
+    /*box-shadow: 10px 10px 0 0 black;*/
+  }
+  
+  .searchSection {
+    position: relative;
+    height: 25vh;
+    margin: 20vh 0 10vh 0;
+    text-align: center;
+    background: #37445E;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, .2);
+    border-radius: 0px 0px 70% 70% / 0px 0px 30% 30%;
+    padding-top: 10vh;
+  }
+  
+  .searchSection2 {
+    display: block;
+    position: relative;
+    height: 35vh;
+    text-align: center;
+    top: 35vh;
+  }
+  
+  .mainText {
+    top: 15vh;
+    position: relative;
+    font-size: 28px;
+    color: white;
+    display: block;
+  }
+  
+  .searchDiv {
+    position: relative;
+    top: 10%;
+    display: inline-block;
+    width: 40vw;
+    margin: 3vh 3vw 3vh 3vw;
+    background-color: white;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, .2);
+    border-radius: 5vh;  
+  }
+  
+  .searchDiv2 {
+    position: relative;
+    display: inline-block;
+    top: 15vh;
+    width: 40vw;
+    margin: 3vh 3vw 3vh 3vw;
+    background-color: white;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, .2);
+    border-radius: 5vh;  
+  }
+  
+  .searchInput {
+    border: none;
+    width: 30vw;
+    height: 5vh;
+    color: #37445E;
+    border-radius: 5vh;
+  }
+  .searchInput:focus {
+    border: none;
+    width: 30vw;
+    height: 5vh;
+    color: #37445E;
+    /* */
+    outline: none;
+  }
+  
+  .searchBtn {
+    border: none;
+    width: 5vw;
+    height: 5.4vh;
+    background-color: white;
+    color: #37445E;
+    border-radius: 5vh;
+  }
+  
+  
+  
+  
+  .gamelist {
+    height: 150vh;
+    /*background-color: #37445E;*/
+    text-align: center;
+  }
+  
+  .ImgDiv {
+    display: inline-block;
+    margin-bottom: 3vh;
+  }
+  
+  .ImgDivDiv{
+    display: table;
+  }
+  
+  .listImg {
+    display: table-row;
+    vertical-align: middle;
+    width: 25vw;
+    margin: 3vh;
+  
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, .2);
+  }
+  
+  .listName {
+    display: table-row;
+    vertical-align: middle;
+  
+    font-size: 18px;
+    color: #37445E;
+  }
+  
+  .hashTagDiv {
+    margin: 2vh;
+    color: #37445E;
+  }
+  
+  .hashTag {
+    border: 0.5vh solid #B8dcff;
+    border-radius: 1vh;
+    margin: 1vh;
+    background: #B8DCFF;
+    font-size: 14px;
+  }
+  
+  
+  
+  
+  
+  
+  /* Error Page css */
+  .errorsection {
+    text-align: center;
+  }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Game-recommandation-service page</title>
+        <link rel="stylesheet" href="./yejin.css" type="text/css">
+    </head>
+    <body>
+        <header>
+            <h2 className="menuText">서비스 이름</h2>
+            <nav>
+              <ul className="menu">
+                <li><a href="#mainRecom">랭킹</a></li>
+                <li>선호도</li>
+                <li>해시태그 입력</li>
+              </ul>
+            </nav>
+    
+            <nav>
+              <ul className="menu">
+                <li>로그인</li>
+                <li>회원가입</li>
+              </ul>
+            </nav>
+          </header>
+          <section className="num1">
+            <span className="mainText">Game recommand service</span>
+            <div className="mainBtnDiv">
+                <button>랭킹</button>
+                <button>선호도</button>
+                <button>해시태그 입력</button>
+            </div>
+  
+            <div className="searchSection2" id="mainRecom">
+              <span className="mainText">게임 추천</span>
+              <div className="searchDiv2">
+                <input className="searchInput" type="text"></input>
+                <button className="searchBtn" type="submit">검색</button>
+              </div>
+            </div>
+          </section>
+
+          <section className="gamelist">
+            <script>
+                for (var i=0; i<12; i++) {
+                    document.write("<div className='ImgDiv'>");
+                    document.write("<div className='ImgDivDiv'>");
+                    document.write("<img src='image1.jpg' className='listImg'></img>");
+                    document.write("<span className='listName'>Game Name</span>");
+                    document.write("<div className='hashTagDiv'>");
+                    document.write("<span className='hashTag'>#호러</span>");
+                    document.write("<span className='hashTag'>#잔인한</span>");
+                    document.write("<span className='hashTag'>#협동</span>");
+                    document.write("</div>");
+                    document.write("</div>");
+                    document.write("</div>");
+                }
+            </script>
+
+
+            
+
+
+
+
+          </section>
+    </body>
+</html>
