@@ -1,7 +1,6 @@
 
 
 const ranking = document.getElementsByClassName('rankingArea')
-const gamesinfoarea = document.getElementsByClassName('games')
 const gameinfo = document.getElementsByClassName('game')
 const game_rank = document.getElementsByClassName('rank')
 const game_icon = document.getElementsByClassName('app-image')
@@ -17,7 +16,7 @@ let apiUrlset = "https://api.rawg.io/api/"
 const apigamelist = `https://api.rawg.io/api/games?key=${api_Key}&`
 
 const getgameList = async () => {
-    const resp = await fetch(apigamelist, {
+    const resp = await fetch(apigamelist + "size=50", {
         mod: 'crs',
         method: 'GET',
         crossDomain: true,
@@ -26,11 +25,36 @@ const getgameList = async () => {
         }
     });
     const data = await resp.json();
-    console.log(data);
+    
     return data.results;
 }
 
-function showRanking(){
+const showRanking = async (game_list) =>{
+    const gamesinfoarea = document.getElementsByClassName('games')
+    const card = (data) => `<div class="game" >
+        <p class="rank">?위</p>
+        <img class="app-image" src="${data.background_image}">
+        <p class="gamename">${data.name}</p>
+        <ul class="hashtags">
+        <li class="hashtag">#호러</li>
+        <li class="hashtag">#잔인함</li>
+        <li class="hashtag">#협동</li>
+        <li class="hashtag">#놀램주의</li>
+        </ul>
+    </div>
+    `;
+    let cards ='';
+    game_list.forEach((data) => {
+        cards += card(data);
+    });
+
+    console.log(cards);
+    gamesinfoarea.innerHTML = cards;
 }
 
-getgameList();
+const init = async () => {
+    let games = await getgameList();
+    showRanking(games);
+}
+
+init();
