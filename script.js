@@ -29,27 +29,39 @@ const getgameList = async () => {
     return data.results;
 }
 
-const showRanking = async (game_list) =>{
-    const gamesinfoarea = document.getElementsByClassName('games')
-    const card = (data) => `<div class="game" >
-        <p class="rank">?위</p>
-        <img class="app-image" src="${data.background_image}">
-        <p class="gamename">${data.name}</p>
-        <ul class="hashtags">
-        <li class="hashtag">#호러</li>
-        <li class="hashtag">#잔인함</li>
-        <li class="hashtag">#협동</li>
-        <li class="hashtag">#놀램주의</li>
-        </ul>
-    </div>
-    `;
-    let cards ='';
-    game_list.forEach((data) => {
-        cards += card(data);
-    });
+const createcard = (data) => {
+    const card = document.createElement('div');
+    card.classList.add('game');
+    card.id = '${data.id}';
+    card.innerHTML = `
+    <p class="rank">?위</p>
+    <img class="app-image" src="${data.background_image}">
+    <p class="gamename">${data.name}</p>
+    <ul class="hashtags">
+    <li class="hashtag">#호러</li>
+    <li class="hashtag">#잔인함</li>
+    <li class="hashtag">#협동</li>
+    <li class="hashtag">#놀램주의</li>
+    </ul>`;
 
-    console.log(cards);
-    gamesinfoarea.innerHTML = cards;
+    return card;
+}
+
+const showRanking = async (game_list) =>{
+    const pregames= document.querySelector('.games')
+    const games = document.createElement('div');
+    games.classList.add('games');
+    game_list.forEach((data) => {
+        const card = createcard(data);
+        games.append(card);
+    });
+    
+    if(pregames){
+        pregames.replaceWith(games);
+    }
+    else{
+        ranking.append(games);
+    }
 }
 
 const init = async () => {

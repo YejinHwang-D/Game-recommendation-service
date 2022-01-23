@@ -3,6 +3,11 @@
     padding: 0px;
 }
 
+img{
+    width: auto;
+    height: 200px;
+}
+
 .total_navi{
     background-color: #374452;
     position: relative;
