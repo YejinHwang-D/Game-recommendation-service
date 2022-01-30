@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Game-recommandation-service page</title>
+        <link rel="stylesheet" href="/css/yejin.css" type="text/css">
+    </head>
+    <body>
+        <header>
+            <h2 class="menuText"><a href="/" class="mainHref">서비스 이름</a></h2>
+            <nav>
+              <ul class="menu">
+                <li><a href="/ranking" class="mainHref">랭킹</a></li>
+                <li><a href="/api/gamelist" class="mainHref">선호도</a></li>
+                <li><a href="/" class="mainHref">해시태그 입력</a></li>
+              </ul>
+            </nav>
+    
+            <nav>
+              <ul class="menu">
+                <li><button class="signBtn" onclick="location.href = '/signin'">로그인</button></li>
+                <li><button class="signBtn" onclick="location.href = '/signup'">회원가입</button></li>
+              </ul>
+            </nav>
+          </header>
+          <section class="num1">
+            <span class="mainText">Game recommand service</span>
+            <div class="mainBtnDiv">
+                <button onclick="location.href = '/ranking'">랭킹</button>
+                <button onclick="location.href = '/api/gamelist'">선호도</button>
+                <button>해시태그 입력</button>
+            </div>
+  
+            <div class="searchSection2" id="mainRecom">
+              <span class="mainText">게임 검색</span>
+              <div class="searchDiv2">
+                <input class="searchInput" type="text"></input>
+                <button class="searchBtn" type="submit">검색</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="gamelist">
+            <script>
+                for (var i=0; i<12; i++) {
+                    document.write("<div class='ImgDiv'>");
+                    document.write("<div class='ImgDivDiv'>");
+                    document.write("<img src='/image/image1.jpg' class='listImg'></img>");
+                    document.write("<span class='listName'>Game Name</span>");
+                    document.write("<div class='hashTagDiv'>");
+                    document.write("<span class='hashTag'>#호러</span>");
+                    document.write("<span class='hashTag'>#잔인한</span>");
+                    document.write("<span class='hashTag'>#협동</span>");
+                    document.write("</div>");
+                    document.write("</div>");
+                    document.write("</div>");
+                }
+            </script>
+
+
+            
+
+
+
+
+          </section>
+    </body>
+</html>
