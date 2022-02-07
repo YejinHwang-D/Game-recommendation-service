@@ -4,8 +4,13 @@
 }
 
 img{
-    width: auto;
+    width: 300px;
     height: 200px;
+}
+
+p {
+    width: 300px;
+    word-wrap: break-word;
 }
 
 .total_navi{
@@ -117,22 +122,75 @@ img{
     margin: 5px;
 }
 
-.rankingArea .games .game{
+.rankingArea .game{
     display: inline-block;
-    margin: 10px;
+    margin: 15px;
 }
 
-.rankingArea .games .game .rank{
+.rankingArea .game .rank{
     font-size: 24px;
     font-weight: bold;
     padding-bottom: 10px;
 }
 
-.rankingArea .games .game .app-image{
+.rankingArea .game .app-image{
     box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, .2);
 }
 
-.rankingArea .games .game .gamename{
+.rankingArea .game .gamename{
+    font-size: 20px;
+    padding-top: 25px;
+}
+
+.gamelists{
+    margin: 100px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.gamelists ul li {
+    display: inline-block;
+    background-color: #B8DCFF;
+    border-radius: 20px;
+    margin: 2px;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-decoration:none;
+    list-style-type: none;
+    color: #365B80;
+    line-height: 30px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, .1);
+    
+    font-size: 14px;
+    font-family: "Trebuchet MS", Dotum, Arial; 
+}
+
+.gamelists .hashtags{ 
+    display: inline-block;
+    color: black;
+    margin: 5px;
+}
+
+.gamelists .game{
+    vertical-align: text-top;
+}
+
+.gamelists .games .game{
+    display: inline-block;
+    margin: 15px;
+}
+
+.gamelists .games .game .rank{
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.gamelists .games .game .app-image{
+    box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, .2);
+}
+
+.gamelists .games .game .gamename{
     font-size: 20px;
     padding-top: 25px;
 }
