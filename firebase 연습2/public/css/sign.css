@@ -1,0 +1,19 @@
+.loginDiv {
+    position: relative;
+    top: 30vw;
+    text-align: center;
+}
+
+.loginForm {
+    position: relative;
+    height: 30vw;
+    background-color: white;
+}
+
+.signInput {
+    display: block;
+}
+
+.signSubmitBtn {
+    display: block;
+}
