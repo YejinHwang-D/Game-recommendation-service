@@ -1,6 +1,7 @@
 const express = require('express');
 var request = require('request');
 const bodyParser = require('body-parser');
+const expressSession = require('express-session');
 var url = require('url');
 var qs = require('querystring');
 var ejs = require('ejs');
@@ -12,6 +13,14 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}))
+
+//session
+app.use(expressSession({
+  secret: 'abcdef',
+  resave: true, //세션을 언제나 저장할지?
+  saveUninitialized: true,
+  httpOnly: true, //JS로 세션 쿠키 사용 못하게 막음
+}))
 
 //db
 const firebase = require('firebase');
@@ -94,30 +103,59 @@ usersRef.set({
 
 //routes
 app.get("/", (req, res) => {
-    res.render("index");
+    if (req.session.user) {
+      res.render("index", {userid: req.session.user});
+    }
+    else {
+      res.render("index");
+    }
 })
 
 app.get("/signin", (req, res) => {
-  res.render("signin");
+  if (req.session.user) {
+    res.render("index", {userid: req.session.user});
+  }
+  else {
+    res.render("signin");
+  }
 })
 
 app.post("/signin-process", function(req, res, next) {
-  console.log(req.body.id);
-  console.log(req.body.pw);
-
-  
   firebase.auth().signInWithEmailAndPassword(req.body.id, req.body.pw)
   .then(function(firebaseUser) {
-    console.log("로그인 성공")
-    res.send("<script>alert('로그인 성공');location.href='/';</script>");
+    req.session.user = {
+      id: req.body.id,
+      name: req.body.id,
+    }
+    console.log("로그인 성공");
+    res.render("index", {userid: req.session.user});
   })
   .catch(function(error) {
-    res.redirect('signin');
+    res.send("<script>alert('로그인 실패');location.href='/signin';</script>");
   })
 })
 
+app.get("/signout", function(req, res) {
+  if (req.session.user) {
+    req.session.destroy(function(err){
+      if (err) throw err;
+      res.send("<script>alert('로그아웃됨');location.href='/';</script>");
+    })
+  }
+  else {
+    console.log("로그인 상태 아님");
+    res.redirect("/signin");
+  }
+})
+
+
 app.get("/signup", (req, res) => {
-  res.render("signup");
+  if (req.session.user) {
+    res.render("index", {userid: req.session.user});
+  }
+  else {
+    res.render("signup");
+  }
 })
 
 app.post("/signup-process", function(req, res, next) {
@@ -141,8 +179,17 @@ app.post("/signup-process", function(req, res, next) {
   }
 })
 
+
+
+
+
 app.get("/ranking", (req, res) => {
+  if (req.session.user) {
+    res.render("index", {userid: req.session.user});
+  }
+  else {
     res.render("ranking");
+  }
 })
 
 //api 요청 주소
@@ -153,6 +200,7 @@ app.get('/api/gamelist', async (req, res) => {
     resListBody = await apiCall(options);
     
     for (var i=0; i<list_Count; i++) {
+      genres_temp = [];
       arr = resListBody.results[i].genres;
       arr.forEach(function(item, index) {
         genres_temp.push(item.name);
@@ -165,8 +213,6 @@ app.get('/api/gamelist', async (req, res) => {
         "genres": genres_temp,
         "background_image": resListBody.results[i].background_image,
       })
-      genres_temp = [];
-
       //firebase 저장 단계
       db.collection('Test').doc('API데이터'+i).set(
         {
@@ -175,7 +221,7 @@ app.get('/api/gamelist', async (req, res) => {
             "rating" : resListBody.results[i].rating,
             "genres": genres_temp,
             "background_image": resListBody.results[i].background_image,
-            "like": 0,
+            "like": 0, //기본값은 0. 좋아요는 1. 싫어요는 -1
         }
       );
     }
@@ -190,10 +236,14 @@ app.get('/api/gamelist', async (req, res) => {
     })
   });
 
-app.post("/api/gamelist/update", async (req, res) => {
-  console.log(req.body.id);
+app.post("/api/gamelist/:number", async (req, res) => {
+  var number = req.params.number;
+  console.log(number);
   console.log(req.body.gameName);
   console.log(req.body.like);
+
+
+  res.send("<script>alert('"+req.body.gameName+"에 대한 회원님의 선호도가 입력되었습니다.');location.href='/api/gamelist';</script>");
 })
 
 

@@ -33,12 +33,13 @@
                     <img class="gameImg" src='<%= list[i].background_image %>' alt="이미지가 없습니다.">
                     <span class="gameName"><%= list[i].name %></span>
                     <span class="gameRating"><%= list[i].rating %></span>
+                    <form method="POST" action="/api/gamelist/<%=i%>" class="BtnForm<%=i%>" style="display:inline-block;">
+                      <input type="hidden" name="gameName" value="<%=list[i].name%>">
+                      <button type="submit" class="likeBtn" name="like" value="like">좋아요</button>
+                      <button type="submit" class="unlikeBtn" name="like" value="unlike">싫어요</button>
+                    </form>
                 </div>
             <% } %>
         </section>
-
-        <form>
-          <button type="submit">저장</button>
-        </form>
     </body>
 </html>

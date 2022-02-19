@@ -45,10 +45,7 @@
     /* nav안의 li들을 가로로 길게 */
     float: left;
   }
-  
 
-  
-  
   .num1 {
     position: relative;
     top: 0;
@@ -56,7 +53,7 @@
     right: 0;
     height: 20vh;
     background: #37445E;
-    margin: 0 0 10vh 0;
+    margin: 0 0 5vh 0;
     border-radius: 0px 0px 70% 70% / 0px 0px 30% 30%;
     box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, .2);
     text-align: center;
@@ -206,4 +203,22 @@
 
   .unlikeBtn:hover {
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .3);
+  }
+
+  .signBtn {
+    width: 6vw;
+    height: 3vw;
+    border: none;
+    background-color: #37445E;
+    color: white;
+  }
+
+  .signBtn:hover {
+    width: 6vw;
+    height: 3vw;
+    border: none;
+    background-color: #37445E;
+    color: white;
+    border-radius: 1vw;
+    box-shadow: 5px 5px 3px 1px rgba(0, 0, 0, .1);
   }

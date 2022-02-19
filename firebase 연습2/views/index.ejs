@@ -17,8 +17,13 @@
     
             <nav>
               <ul class="menu">
-                <li><button class="signBtn" onclick="location.href = '/signin'">로그인</button></li>
-                <li><button class="signBtn" onclick="location.href = '/signup'">회원가입</button></li>
+                <% if (this.userid) { %>
+                  <li><button class="signBtn" onclick="location.href = '/signout'">로그아웃</button></li>
+                  <li><button class="signBtn" onclick="location.href = '/'">MYPAGE</button></li>
+                <% } else { %>
+                  <li><button class="signBtn" onclick="location.href = '/signin'">로그인</button></li>
+                  <li><button class="signBtn" onclick="location.href = '/signup'">회원가입</button></li>
+                <% } %>
               </ul>
             </nav>
           </header>

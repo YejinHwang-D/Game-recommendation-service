@@ -1,6 +1,6 @@
 .loginDiv {
     position: relative;
-    top: 30vw;
+    top: 25vh;
     text-align: center;
 }
 
@@ -11,9 +11,32 @@
 }
 
 .signInput {
-    display: block;
+    display: inline-block;
+    border: none;
+    width: 15vw;
+    height: 3vw;
+    min-width: 150px;
+    min-height: 30px;
+    
+    border-radius: 0.5vw;
 }
 
 .signSubmitBtn {
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    width: 6vw;
+    height: 3.3vw;
+    min-width: 50px;
+    min-height: 32px;
+    background-color: white;
+    
+    border-radius: 0.5vw;
+}
+
+.loginText {
     display: block;
+    color: white;
+    font-size: 18px;
+    margin-bottom: 3vw;
 }
