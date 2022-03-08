@@ -1,0 +1,92 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+img{
+    width: 300px;
+    height: 200px;
+}
+
+p {
+    width: 300px;
+    word-wrap: break-word;
+}
+
+.total_navi{
+    background-color: #374452;
+    position: relative;
+    width: auto;
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.total_navi a {
+    color: white;
+    text-decoration:none !important
+}
+
+.total_navi ul li {
+    display: inline-block;
+    text-decoration:none;
+    list-style-type: none;
+    color: white;
+    line-height: 30px;
+    
+    font-weight: bold;
+    font-family: "Trebuchet MS", Dotum, Arial; 
+}
+
+.total_navi .logos{
+    position: fixed;
+    display: inline-block;
+    color: white;
+    margin: 10px;
+    left: 40px;
+}
+
+.total_navi .logos .navi_logo{
+    margin: 10px;
+    font-size: 0%;
+}
+
+.total_navi .pages{
+    display: inline-block;
+    color: white;
+    left: 50%;
+    right: 50%;
+    margin: 10px;
+}
+
+.total_navi .pages .navi {
+    width: auto;
+    margin-left: 35px;
+    margin-right: 35px;
+    font-size: 12px;
+}
+
+.total_navi .userinfo{
+    margin: 10px;
+    color: white;
+    position: fixed;
+    display: inline-block;
+    right: 40px;
+}
+
+.total_navi .userinfo .info{
+    margin-left: 28px;
+    font-size: 12px;
+}
+
+.titleArea{
+    width: initial;
+    height:initial;
+    background-color: #374452;
+    border-radius: 0px 0px 70% 70% / 0px 0px 30% 30%;
+    color: white;
+    text-align: center;
+    padding: 4rem;
+    padding-bottom: 5rem;
+    vertical-align: middle;
+}
