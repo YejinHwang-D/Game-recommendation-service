@@ -19,8 +19,13 @@
     
             <nav>
               <ul class="menu">
-                <li><button class="signBtn" onclick="location.href = '/signin'">로그인</button></li>
-                <li><button class="signBtn" onclick="location.href = '/signup'">회원가입</button></li>
+                <% if (user_id != "") { %>
+                  <li><button class="signBtn" onclick="location.href = '/signout'">로그아웃</button></li>
+                  <li><button class="signBtn" onclick="location.href = '/'">MYPAGE</button></li>
+                <% } else { %>
+                  <li><button class="signBtn" onclick="location.href = '/signin'">로그인</button></li>
+                  <li><button class="signBtn" onclick="location.href = '/signup'">회원가입</button></li>
+                <% } %>
               </ul>
             </nav>
           </header>
@@ -33,11 +38,18 @@
                     <img class="gameImg" src='<%= list[i].background_image %>' alt="이미지가 없습니다.">
                     <span class="gameName"><%= list[i].name %></span>
                     <span class="gameRating"><%= list[i].rating %></span>
-                    <form method="POST" action="/api/gamelist/<%=i%>" class="BtnForm<%=i%>" style="display:inline-block;">
+                    <div class="gameGenres">
+                    <% for(var j = 0; j < list[i].genres.length; j++) { %>
+                      <span class="gameGenresText"><%= list[i].genres[j] %></span>
+                    <% } %>
+                    </div>
+                    <% if (user_id != "") { %>
+                    <form method="POST" action="/api/gamelist/<%=i%>" class="BtnForm" style="display:inline-block;">
                       <input type="hidden" name="gameName" value="<%=list[i].name%>">
                       <button type="submit" class="likeBtn" name="like" value="like">좋아요</button>
                       <button type="submit" class="unlikeBtn" name="like" value="unlike">싫어요</button>
                     </form>
+                    <% } %>
                 </div>
             <% } %>
         </section>

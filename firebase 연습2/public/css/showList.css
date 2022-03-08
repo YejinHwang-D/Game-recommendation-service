@@ -165,8 +165,8 @@
     display: inline-block; 
     position: relative; 
     width: 20vw; 
-    height: 20vw;
-    min-height: 180px;
+    height: 25vw;
+    min-height: 250px;
     margin: 5vh;
     border-radius: 1vw;
     text-align: center; 
@@ -221,4 +221,15 @@
     color: white;
     border-radius: 1vw;
     box-shadow: 5px 5px 3px 1px rgba(0, 0, 0, .1);
+  }
+
+  .gameGenres {
+    margin: 1vh;
+  }
+
+  .gameGenresText {
+    color: white;
+    background-color: #7987a1;
+    padding: 0.2vh;
+    border-radius: 0.3vw;
   }

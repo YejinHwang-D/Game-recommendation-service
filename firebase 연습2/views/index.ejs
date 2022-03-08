@@ -17,7 +17,7 @@
     
             <nav>
               <ul class="menu">
-                <% if (this.userid) { %>
+                <% if (user_id != "") { %>
                   <li><button class="signBtn" onclick="location.href = '/signout'">로그아웃</button></li>
                   <li><button class="signBtn" onclick="location.href = '/'">MYPAGE</button></li>
                 <% } else { %>
@@ -34,7 +34,6 @@
                 <button onclick="location.href = '/api/gamelist'">선호도</button>
                 <button>해시태그 입력</button>
             </div>
-  
             <div class="searchSection2" id="mainRecom">
               <span class="mainText">게임 검색</span>
               <div class="searchDiv2">

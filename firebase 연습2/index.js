@@ -9,6 +9,7 @@ const cors = require('cors');
 const path = require('path');
 const User = require('./config');
 const TestData = require('./config');
+const ref = require('firebase');
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -104,33 +105,36 @@ usersRef.set({
 //routes
 app.get("/", (req, res) => {
     if (req.session.user) {
-      res.render("index", {userid: req.session.user});
+      console.log(req.session.user['id'])
+
+      
+      res.render("index", { user_id: req.session.user['id'], text: "로그인o" });
     }
     else {
-      res.render("index");
+      res.render("index", {user_id: "", text: "로그인x"});
     }
 })
 
 app.get("/signin", (req, res) => {
   if (req.session.user) {
-    res.render("index", {userid: req.session.user});
+    res.render("index", {user_id: req.session.user['id']});
   }
   else {
-    res.render("signin");
+    res.render("signin", {user_id: "", text: "로그인x"});
   }
 })
 
-app.post("/signin-process", function(req, res, next) {
+app.post("/signin-process", function(req, res) {
   firebase.auth().signInWithEmailAndPassword(req.body.id, req.body.pw)
   .then(function(firebaseUser) {
     req.session.user = {
       id: req.body.id,
       name: req.body.id,
     }
-    console.log("로그인 성공");
-    res.render("index", {userid: req.session.user});
+    res.send("<script>alert('로그인 성공');location.href='/';</script>");
   })
   .catch(function(error) {
+    console.log(error.code)
     res.send("<script>alert('로그인 실패');location.href='/signin';</script>");
   })
 })
@@ -151,14 +155,14 @@ app.get("/signout", function(req, res) {
 
 app.get("/signup", (req, res) => {
   if (req.session.user) {
-    res.render("index", {userid: req.session.user});
+    res.render("index", {user_id: req.session.user['id']});
   }
   else {
-    res.render("signup");
+    res.render("signup", {user_id: ""});
   }
 })
 
-app.post("/signup-process", function(req, res, next) {
+app.post("/signup-process", function(req, res) {
   const name = req.body.name;
   const id = req.body.id;
   const pwd = req.body.pwd;
@@ -170,11 +174,23 @@ app.post("/signup-process", function(req, res, next) {
   else {
     firebase.auth().createUserWithEmailAndPassword(id, pwd)
     .then(function(firebaseUser) {
+      console.log(firebaseUser.user.email);
+      db.collection(firebaseUser.user.email).doc("LikeList").set({
+        "state": false,
+      });
+      
       res.send("<script>alert('회원가입 완료<br>로그인 페이지로 이동합니다.');location.href='/signin';</script>");
+      
     })
     .catch(function(error){
-      res.redirect('signin');
-      res.send("<script>alert('회원가입 실패<br>회원가입 페이지로 이동합니다.');location.href='/signup';</script>");
+      console.log(error.code);
+      if (error.code == 'auth/email-already-in-use') {
+        res.send("<script>alert('이미 존재하는 계정입니다.');location.href='/signup';</script>");
+      }
+      else {
+        res.send("<script>alert('회원가입 실패<br>회원가입 페이지로 이동합니다.');location.href='/signup';</script>");
+      }
+      
     })
   }
 })
@@ -182,13 +198,12 @@ app.post("/signup-process", function(req, res, next) {
 
 
 
-
 app.get("/ranking", (req, res) => {
   if (req.session.user) {
-    res.render("index", {userid: req.session.user});
+    res.render("ranking", {user_id: req.session.user['id']});
   }
   else {
-    res.render("ranking");
+    res.render("ranking", {user_id: ""});
   }
 })
 
@@ -199,53 +214,103 @@ app.get('/api/gamelist', async (req, res) => {
     res.set('Cache-Control', 'no-cache');
     resListBody = await apiCall(options);
     
-    for (var i=0; i<list_Count; i++) {
-      genres_temp = [];
-      arr = resListBody.results[i].genres;
-      arr.forEach(function(item, index) {
-        genres_temp.push(item.name);
-      })
-
-      res_list.push({
-        "name": resListBody.results[i].name,
-        "released": resListBody.results[i].released,
-        "rating": resListBody.results[i].rating,
-        "genres": genres_temp,
-        "background_image": resListBody.results[i].background_image,
-      })
-      //firebase 저장 단계
-      db.collection('Test').doc('API데이터'+i).set(
-        {
-            "name": resListBody.results[i].name,
-            "released": resListBody.results[i].released,
-            "rating" : resListBody.results[i].rating,
-            "genres": genres_temp,
-            "background_image": resListBody.results[i].background_image,
-            "like": 0, //기본값은 0. 좋아요는 1. 싫어요는 -1
+    if (req.session.user) {
+      //user가 있을 때.
+      for (var i=0; i<list_Count; i++) {
+        genres_temp = [];
+        arr = resListBody.results[i].genres;
+        arr.forEach(function(item, index) {
+          genres_temp.push(item.name);
+        })
+  
+        res_list.push({
+          "name": resListBody.results[i].name,
+          "released": resListBody.results[i].released,
+          "rating": resListBody.results[i].rating,
+          "genres": genres_temp,
+          "background_image": resListBody.results[i].background_image,
+        })
+        var docRef = db.collection(req.session.user['id']).doc("LikeList");
+        docRef.get().then(function(res) {
+        if (res.exists) {
+          //console.log(res.data().state) //false. 그냥 res.data()하면 { state: false } 형태로 나옴.
+          if (res.data().state == false) {
+            db.collection(req.session.user['id']).doc(resListBody.results[i].name).set(
+                {
+                  "name": resListBody.results[i].name,
+                  "released": resListBody.results[i].released,
+                  "rating" : resListBody.results[i].rating,
+                  "genres": genres_temp,
+                  "background_image": resListBody.results[i].background_image,
+                  "like": 0, //기본값은 0. 좋아요는 1. 싫어요는 -1
+                  "save_check": 0, //최초 저장 안됨 0, 최초 저장 됨 1
+                }
+              );
+              db.collection(req.session.user['id']).doc("LikeList").set({
+                "state": true,
+              });
+            }
         }
-      );
+        })
+      }
+      res.render('showList', {list: res_list, user_id: req.session.user['id']}, (error, html) => {
+        if (error) {
+          console.log(error);
+        }
+        else {
+          res.end(html);
+        }
+      })
     }
-
-    res.render('showList.ejs', {"list": res_list}, (error, html) => {
-      if (error) {
-        console.log(error);
+    else {
+      //유저가 없을 때.
+      for (var i=0; i<list_Count; i++) {
+        genres_temp = [];
+        arr = resListBody.results[i].genres;
+        arr.forEach(function(item, index) {
+          genres_temp.push(item.name);
+        })
+  
+        res_list.push({
+          "name": resListBody.results[i].name,
+          "released": resListBody.results[i].released,
+          "rating": resListBody.results[i].rating,
+          "genres": genres_temp,
+          "background_image": resListBody.results[i].background_image,
+        })
       }
-      else {
-        res.end(html);
-      }
-    })
+      res.render('showList', {list: res_list, user_id: ""}, (error, html) => {
+        if (error) {
+          console.log(error);
+        }
+        else {
+          res.end(html);
+        }
+      })
+    }
   });
 
 app.post("/api/gamelist/:number", async (req, res) => {
-  var number = req.params.number;
-  console.log(number);
-  console.log(req.body.gameName);
-  console.log(req.body.like);
-
-
-  res.send("<script>alert('"+req.body.gameName+"에 대한 회원님의 선호도가 입력되었습니다.');location.href='/api/gamelist';</script>");
+  if (req.session.user) {
+    var number = req.params.number;
+    var likeType = 0;
+    console.log(number);
+    console.log(req.body.gameName);
+    if (req.body.like === "like") {
+      likeType = 1;
+   }
+    else {
+      likeType = -1;
+    }
+    console.log("likeType = " + likeType);
+    const likeRef = db.collection(req.session.user['id']).doc(req.body.gameName);
+    const resThen = await likeRef.update({like: likeType});
+    res.send("<script>alert('"+req.body.gameName+"에 대한 회원님의 선호도가 입력되었습니다.');location.href='/api/gamelist';</script>");
+  }
+  else {
+    res.send("<script>alert('회원만 선택하실 수 있습니다.');location.href='/api/gamelist';</script>");
+  }
 })
-
 
 
 
