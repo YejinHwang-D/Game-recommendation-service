@@ -230,29 +230,39 @@ app.get('/api/gamelist', async (req, res) => {
           "genres": genres_temp,
           "background_image": resListBody.results[i].background_image,
         })
-        var docRef = db.collection(req.session.user['id']).doc("LikeList");
+      }
+
+
+      var docRef = db.collection(req.session.user['id']).doc("LikeList");
         docRef.get().then(function(res) {
         if (res.exists) {
           //console.log(res.data().state) //false. 그냥 res.data()하면 { state: false } 형태로 나옴.
           if (res.data().state == false) {
-            db.collection(req.session.user['id']).doc(resListBody.results[i].name).set(
+            for (var i=0; i<res_list.length; i++) {
+              db.collection(req.session.user['id']).doc(res_list[i].name).set(
                 {
-                  "name": resListBody.results[i].name,
-                  "released": resListBody.results[i].released,
-                  "rating" : resListBody.results[i].rating,
-                  "genres": genres_temp,
-                  "background_image": resListBody.results[i].background_image,
+                  "name": res_list[i].name,
+                  "released": res_list[i].released,
+                  "rating" : res_list[i].rating,
+                  "genres": res_list[i].genres,
+                  "background_image": res_list[i].background_image,
                   "like": 0, //기본값은 0. 좋아요는 1. 싫어요는 -1
-                  "save_check": 0, //최초 저장 안됨 0, 최초 저장 됨 1
                 }
               );
-              db.collection(req.session.user['id']).doc("LikeList").set({
-                "state": true,
-              });
+            }
+            db.collection(req.session.user['id']).doc("LikeList").set({
+              "state": true,
+            });
             }
         }
-        })
-      }
+        })      
+
+
+
+
+
+
+
       res.render('showList', {list: res_list, user_id: req.session.user['id']}, (error, html) => {
         if (error) {
           console.log(error);
