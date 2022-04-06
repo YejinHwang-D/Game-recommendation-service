@@ -260,10 +260,7 @@ app.get('/api/gamelist', async (req, res) => {
 
 
 
-
-
-
-      res.render('showList', {list: res_list, user_id: req.session.user['id']}, (error, html) => {
+      res.render('showList', {list: res_list, user_id: req.session.user['id'], text: ""}, (error, html) => {
         if (error) {
           console.log(error);
         }
@@ -289,7 +286,7 @@ app.get('/api/gamelist', async (req, res) => {
           "background_image": resListBody.results[i].background_image,
         })
       }
-      res.render('showList', {list: res_list, user_id: ""}, (error, html) => {
+      res.render('showList', {list: res_list, user_id: "", text: "로그인하시면 선호도를 입력하실 수 있어요!"}, (error, html) => {
         if (error) {
           console.log(error);
         }
@@ -354,4 +351,4 @@ app.post("/update", async(req, res)=>{
     res.send({msg: "Updated"});
 })
 
-app.listen(3000, ()=> console.log("Running!"))
+app.listen(3000, ()=> console.log("Running on 3000"))
