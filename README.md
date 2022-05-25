@@ -1,5 +1,3 @@
-# Game-recommendation-service
-
 ## 게임 추천 서비스 Game Recommendation Service
 
 ### 1. Intro
